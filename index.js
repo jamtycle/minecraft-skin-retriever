@@ -4,6 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const app = express();
 
+let skin_folder = path.join(__dirname, "/skins");
+
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/index.html"));
 });
@@ -21,8 +23,8 @@ app.post("/skins/", (req, res, next) => {
 
         // let data = res.json({ fields, files });
 
-        if (!fs.existsSync(path.join(__dirname, "/skins"))) {
-            fs.mkdirSync(path.join(__dirname, "/skins"));
+        if (!fs.existsSync(skin_folder)) {
+            fs.mkdirSync(skin_folder);
         }
 
         let filename = path.join(__dirname, `/skins/${fields.username}.png`);
@@ -56,8 +58,8 @@ app.get("/skins/:username", (req, res) => {
 // start the server listening for requests
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server is running...")
-
-    if (!fs.existsSync(path.join(__dirname, "/skins"))) {
-        fs.mkdirSync(path.join(__dirname, "/skins"));
+    console.log(`Skin folder: ${skin_folder}`);
+    if (!fs.existsSync(skin_folder)) {
+        fs.mkdirSync(skin_folder);
     }
 });
