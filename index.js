@@ -20,18 +20,23 @@ app.post("/skins/", (req, res, next) => {
         }
 
         // let data = res.json({ fields, files });
+
+        if (!fs.existsSync(path.join(__dirname, "/skins"))) {
+            fs.mkdir(path.join(__dirname, "/skins"));
+        }
+
         let filename = path.join(__dirname, `/skins/${fields.username}.png`);
         let image = files.image.filepath;
 
         fs.copyFile(image, filename, (err) => {
             if (err) {
-                res.send(err);
+                res.send(err.message);
                 return;
             }
 
             fs.unlink(image, (err) => {
                 if (err) {
-                    res.send(err);
+                    res.send(err.message);
                     return;
                 }
 
@@ -49,4 +54,10 @@ app.get("/skins/:username", (req, res) => {
 });
 
 // start the server listening for requests
-app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server is running...")
+
+    if (!fs.existsSync(path.join(__dirname, "/skins"))) {
+        fs.mkdir(path.join(__dirname, "/skins"));
+    }
+});
