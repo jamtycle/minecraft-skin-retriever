@@ -4,9 +4,13 @@
   "description": "Skin Web Service for a Minecraft Server",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "start": "node index.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamtycle/minecraft-skin-retriever.git"
+  },
+  "author": "Jamtycle",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
