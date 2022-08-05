@@ -22,7 +22,7 @@ app.post("/skins/", (req, res, next) => {
         // let data = res.json({ fields, files });
 
         if (!fs.existsSync(path.join(__dirname, "/skins"))) {
-            fs.mkdir(path.join(__dirname, "/skins"));
+            fs.mkdirSync(path.join(__dirname, "/skins"));
         }
 
         let filename = path.join(__dirname, `/skins/${fields.username}.png`);
@@ -58,6 +58,6 @@ app.listen(process.env.PORT || 3000, () => {
     console.log("Server is running...")
 
     if (!fs.existsSync(path.join(__dirname, "/skins"))) {
-        fs.mkdir(path.join(__dirname, "/skins"));
+        fs.mkdirSync(path.join(__dirname, "/skins"));
     }
 });
